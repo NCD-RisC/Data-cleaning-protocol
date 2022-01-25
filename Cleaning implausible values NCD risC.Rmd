@@ -3,7 +3,7 @@ title: "Cleaning individual
  data with biologically implausible values in NCD-RisC database"
 #author: "NCD RisC"
 #date: "19/01/2022"
-output: html_document
+output: md_document
 bibliography: biblio.bib
 link-citations: yes
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/cardiff-university-vancouver.csl
@@ -12,34 +12,7 @@ csl: https://raw.githubusercontent.com/citation-style-language/styles/master/car
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-<style>
-table th:first-of-type {
-    width: 12%;
-}
-table th:nth-of-type(2) {
-    width: 12%;
-}
-table th:nth-of-type(3) {
-    width: 12%;
-}
-table th:nth-of-type(4) {
-    width: 12%;
-}
-table th:nth-of-type(5) {
-    width: 12%;
-}
-table th:nth-of-type(6) {
-    width: 12%;
-}
-table th:nth-of-type(7) {
-    width: 12%;
-}
-table th:nth-of-type(8) {
-    width: 16%;
-}
-
-</style>
+# Cleaning individual data with biologically implausible values in NCD-RisC database
 
 This document is the protocol for cleaning multiple variables in the NCD-RisC database, which has the following steps: \
 
@@ -53,43 +26,44 @@ Data outside the following plausibility ranges will be removed.
 
 *Anthropometrics*
 
+
 |Variable   | Height (cm)| Weight (kg)| BMI (kg/m2) | Waist (cm) | Hip (cm) | Waist-to-hip ratio| Waist-to-height ratio|
 |:----------|:-----------|:-----------|:------------|:-----------|:---------|:------------------|:---------------------|
 |5-9 years  |   60-180   |    5-90    |     6-40    |   20-150   |  30-180  |       0.4-1.8     |          0.2-1.5     |          
 |10-14 years|   80-200   |    8-150   |     8-60    |   20-200   |  30-200  |       0.4-1.8     |          0.2-1.5     |                 
 |15+ years  |   100-250  |   12-300   |     10-80   |   30-300   |  40-300  |       0.4-2.0     |          0.2-2.0     |
-                                     
+
 \n
 
 *Blood Pressure*
 
-|Variable   | SBP (mmHg) |DBP (mmHg)| | | | | |
-|:----------|:-----------|:---------|-|-|-|-|-|
-|All ages   |   70-270   |  30-150  | | | | | | 
+|Variable   | SBP (mmHg) |DBP (mmHg)|
+|:----------|:-----------|:---------|
+|All ages   |   70-270   |  30-150  |
 
 \n
 
 *Lipids*
 
-|Variable   | TC (mmol/L) |HDL (mmol/L)|LDL (mmol/L)|Triglycerides (mmol/L)| | | | 
-|:----------|:------------|:-----------|:-----------|:---------------------|-|-|-|
-|All ages   |   1.75-20   |  0.5-10    |  0.4-5     |  0.2-20              | | | |
+|Variable   | TC (mmol/L) |HDL (mmol/L)|LDL (mmol/L)|Triglycerides (mmol/L)|
+|:----------|:------------|:-----------|:-----------|:---------------------|
+|All ages   |   1.75-20   |  0.5-10    |  0.4-5     |  0.2-20              |
 
 \n
 
 *Glucose*
 
-|Variable   | FPG (mmol/L)|OGTT (mmol/L)|HbA1c (%)| | | | |
-|:----------|:------------|:------------|:--------|-|-|-|-|
-|All ages   |   2.5-30    |  1.5-30     |  3-18   | | | | |           
+|Variable   | FPG (mmol/L)|OGTT (mmol/L)|HbA1c (%)|
+|:----------|:------------|:------------|:--------|
+|All ages   |   2.5-30    |  1.5-30     |  3-18   |
 
 \n
 
 *Kidney related variable*
 
-|Variable   | Serum creatinine (µmol/L)|eGFR (mL/min/1.73m2)| | | | | |
-|:----------|:-------------------------|:-------------------|-|-|-|-|-|
-|All ages   |   8-1800                 |  5-250             | | | | | |   
+|Variable   | Serum creatinine (µmol/L)|eGFR (mL/min/1.73m2)|
+|:----------|:-------------------------|:-------------------|
+|All ages   |   8-1800                 |  5-250             |
 
 \n
 
