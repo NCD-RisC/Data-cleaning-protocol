@@ -1,0 +1,153 @@
+---
+title: "Cleaning individual
+ data with biologically implausible values in NCD-RisC database"
+#author: "NCD RisC"
+#date: "19/01/2022"
+output: html_document
+bibliography: biblio.bib
+link-citations: yes
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/cardiff-university-vancouver.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<style>
+table th:first-of-type {
+    width: 12%;
+}
+table th:nth-of-type(2) {
+    width: 12%;
+}
+table th:nth-of-type(3) {
+    width: 12%;
+}
+table th:nth-of-type(4) {
+    width: 12%;
+}
+table th:nth-of-type(5) {
+    width: 12%;
+}
+table th:nth-of-type(6) {
+    width: 12%;
+}
+table th:nth-of-type(7) {
+    width: 12%;
+}
+table th:nth-of-type(8) {
+    width: 16%;
+}
+
+</style>
+
+This document is the protocol for cleaning multiple variables in the NCD-RisC database, which has the following steps: \
+
+  1.	Applying univariate plausibility ranges\
+  2.	Applying multivariate constraints\
+  3.	Multivariate outlier detection\
+
+### 1.	Univariate plausibility ranges
+
+Data outside the following plausibility ranges will be removed.
+
+*Anthropometrics*
+
+|Variable   | Height (cm)| Weight (kg)| BMI (kg/m2) | Waist (cm) | Hip (cm) | Waist-to-hip ratio| Waist-to-height ratio|
+|:----------|:-----------|:-----------|:------------|:-----------|:---------|:------------------|:---------------------|
+|5-9 years  |   60-180   |    5-90    |     6-40    |   20-150   |  30-180  |       0.4-1.8     |          0.2-1.5     |          
+|10-14 years|   80-200   |    8-150   |     8-60    |   20-200   |  30-200  |       0.4-1.8     |          0.2-1.5     |                 
+|15+ years  |   100-250  |   12-300   |     10-80   |   30-300   |  40-300  |       0.4-2.0     |          0.2-2.0     |
+                                     
+\n
+
+*Blood Pressure*
+
+|Variable   | SBP (mmHg) |DBP (mmHg)| | | | | |
+|:----------|:-----------|:---------|-|-|-|-|-|
+|All ages   |   70-270   |  30-150  | | | | | | 
+
+\n
+
+*Lipids*
+
+|Variable   | TC (mmol/L) |HDL (mmol/L)|LDL (mmol/L)|Triglycerides (mmol/L)| | | | 
+|:----------|:------------|:-----------|:-----------|:---------------------|-|-|-|
+|All ages   |   1.75-20   |  0.5-10    |  0.4-5     |  0.2-20              | | | |
+
+\n
+
+*Glucose*
+
+|Variable   | FPG (mmol/L)|OGTT (mmol/L)|HbA1c (%)| | | | |
+|:----------|:------------|:------------|:--------|-|-|-|-|
+|All ages   |   2.5-30    |  1.5-30     |  3-18   | | | | |           
+
+\n
+
+*Kidney related variable*
+
+|Variable   | Serum creatinine (µmol/L)|eGFR (mL/min/1.73m2)| | | | | |
+|:----------|:-------------------------|:-------------------|-|-|-|-|-|
+|All ages   |   8-1800                 |  5-250             | | | | | |   
+
+\n
+
+### 2. Multivariate constraints
+
+    
+The following constraints are applied after removing data outside the plausibility ranges listed above:\
+
+  -	SBP > DBP\
+  -	TC > LDL\
+  -	TC > HDL\
+  - TC – (LDL + HDL) $\leq$ margin of error*
+
+\n
+   
+*“margin of error” is determined by using the Cholesterol Reference Method Laboratory Network permitted measurement error limits for TC (8.9%), HDL (13%) and LDL (12%) as follows:\
+
+-	Calculate errors in worst case scenario, i.e., TC underestimated and HDL/LDL overestimated, each by the largest error permitted;\
+-	The limit of errors by quartiles of TC using US NHANES data: \
+
+
+|TC range (mmol/L)       | <4.040 |4.040 to <4.714|4.714 to <5.465| $\geq$ 5.465|
+|:-----------------------|:-------|:--------------|:--------------|:--------|
+|Margin of error (mmol/L)|-0.7125 | -0.8821       | -0.9700       | -1.7520 |
+
+### 3. Multivariate outlier detection
+
+After applying both univariate plausibility ranges and multivariate constraints, multivariate outlier detection is carried out on pairs of variables within the same risk factor family (see lists later).\
+In each pair, a method based on Mahalanobis distance @filzmoser2004multivariate is used to calculate the distance of the data points to the centre of all available data, and those that lie outside a certain threshold will be removed. Although called “outlier detection”, the threshold is chosen to catch only extreme values that are implausible. The points detected and removed should be examined in scatter plots.
+
+
+#### Data Normalization 
+
+Mahalanobis outlier detection method assumes the data to be normally distributed. 
+We suggest to compare the distribution of each variable to the variable log transformed, and pick the closest to normal distribution. 
+In case neither the variable nor it's log transformation are close to be normally distributed, alternative non-parametric methods should be used. 
+
+
+#### Pairs of variables considered
+
+All pairs of variables from the same family (anthropometrics, blood pressure etc...) should be considered. \
+For blood pressure, if multiple measurements are taken, the average SBP and DBP are calculated before multivariate cleaning, and after excluding measurements outside of plausibility ranges, by discarding the first measurement and averaging the remainings.\
+For lipids, LDL (or non-HDL) is very skewed,so we advise to not clean on the pair LDL-TC using mahalanobis distance. \
+Glucose variables tend to have a very skewed distribution and we advise to not clean any pair of glucose variables using Mahalanobis distance. \
+For Kidney, eGFR is calculated from serum creatinine using a regression-based model (eg. CKD-EPI) hence multivariate cleaning is not needed.
+
+#### Procedure of multivariate outlier detection
+
+For each pair listed above:\
+  -	Compute the Mahalanobis of distance of all the data points after normalisation\
+  -	Exclude points with distance larger than 40.08 (quantile of chi2 distribution equivalent to 6SD for normal distribution)\
+
+
+#### Code and example 
+For the code and an example on simulated data of the multivariate outlier detection procedure go to:
+https://github.com/vpl19/mahalanobis_cleaning.git
+
+**References:**
+
+
+  
