@@ -145,7 +145,7 @@ For each pair listed above:\
 
 #### Code and example 
 For the code and an example on simulated data of the multivariate outlier detection procedure go to:
-https://github.com/vpl19/mahalanobis_cleaning.git
+https://github.com/NCD-RisC/Multivariate-cleaning
 
 **References:**
 
