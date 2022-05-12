@@ -200,7 +200,7 @@ variables within the same risk factor family (see lists later).
 In each pair, a method based on Mahalanobis distance
 ([1](#ref-filzmoser2004multivariate)) is used to calculate the distance
 of the data points to the centre of all available data, and those that
-lie outside a certain threshold will be removed. Although called
+lie outside a certain threshold will be removed (both variables). Although called
 “outlier detection”, the threshold is chosen to catch only extreme
 values that are implausible. The points detected and removed should be
 examined in scatter plots.
@@ -229,14 +229,15 @@ to not clean any pair of glucose variables using Mahalanobis distance.
 For Kidney, eGFR is calculated from serum creatinine using a
 regression-based model (eg. CKD-EPI) hence multivariate cleaning is not
 needed.
-
+For anthropometrics variables, the procedure should be applied separaetely for 
+children (5-9 yos), adolescents (10-14 yos), and adults (15+).
 #### Procedure of multivariate outlier detection
 
 For each pair listed above:  
 - Compute the Mahalanobis of distance of all the data points after
 normalisation  
-- Exclude points with distance larger than 40.08 (quantile of chi2
-distribution equivalent to 6SD for normal distribution)  
+- Exclude points with distance larger than 68.5 (quantile of chi2
+distribution equivalent to 8SD for normal distribution)  
 
 #### Code and example
 

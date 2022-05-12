@@ -5,7 +5,7 @@
 library(rrcov)
 library(ggplot2)
 
-maha_clean <- function(var1, var2, level = NA, SD = 6, plot_data = TRUE){
+maha_clean <- function(var1, var2, level = NA, SD = 8, plot_data = TRUE){
   # default level is equivalent to being 6 sd away from the mean for normal distribution
   if (is.na(level)) level <- (1-pnorm(SD))*2
   
