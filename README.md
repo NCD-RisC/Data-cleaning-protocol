@@ -159,6 +159,7 @@ The following constraints are applied after removing data outside the
 plausibility ranges listed above:  
 
 -   SBP &gt; DBP  
+If multiple measurements of blood pressure are taken, the average SBP and DBP are calculated by discarding the first measurement and averaging the remainders. The averaging should be done after excluding measurements outside of univariate plausibility ranges noted in the first section and before applying multivariate constraints or multivariate outlier detection
 -   TC &gt; LDL  
 -   TC &gt; HDL  
 -   TC – (LDL + HDL) ≤ margin of error\*
