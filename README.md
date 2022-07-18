@@ -1,16 +1,16 @@
-Cleaning individual data with biologically implausible values in NCD-RisC database
+Cleaning individual data in NCD-RisC database
 ==================================================================================
 
 This document is the protocol for cleaning multiple variables in the
 NCD-RisC database, which has the following steps:  
 
-1.  Applying univariate plausibility ranges  
-2.  Applying multivariate constraints  
+1.  Applying univariate cleaning criteria  
+2.  Applying multivariate cleaning criteria   
 3.  Multivariate outlier detection  
 
-### 1. Univariate plausibility ranges
+### 1. Applying Univariate cleaning criteria  
 
-Data outside the following plausibility ranges will be removed.
+Data outside the following ranges will be removed to minimise the possibility of entry error.
 
 *Anthropometrics*
 
@@ -153,13 +153,12 @@ Data outside the following plausibility ranges will be removed.
 </tbody>
 </table>
 
-### 2. Multivariate constraints
+### Applying multivariate cleaning criteria
 
-The following constraints are applied after removing data outside the
-plausibility ranges listed above:  
+The following constraints are applied after applying univariate cleaning criteria listed above:  
 
 -   SBP &gt; DBP  
-If multiple measurements of blood pressure are taken, the average SBP and DBP are calculated by discarding the first measurement and averaging the remainders. The averaging should be done after excluding measurements outside of univariate plausibility ranges noted in the first section and before applying multivariate constraints or multivariate outlier detection
+If multiple measurements of blood pressure are taken, the average SBP and DBP are calculated by discarding the first measurement and averaging the remainders. The constraint is applied to the average SBP and DBP. The averaging should be done after excluding measurements outside of the ranges in the univariate cleaning criteria noted in the first section.
 -   TC &gt; LDL  
 -   TC &gt; HDL  
 -   TC – (LDL + HDL) ≤ margin of error\*
@@ -195,8 +194,8 @@ Method Laboratory Network permitted measurement error limits for TC
 
 ### 3. Multivariate outlier detection
 
-After applying both univariate plausibility ranges and multivariate
-constraints, multivariate outlier detection is carried out on pairs of
+After applying both univariate and multivariate
+cleaning criteria, multivariate outlier detection is carried out on pairs of
 variables within the same risk factor family (see lists later).  
 In each pair, a method based on Mahalanobis distance
 ([1](#ref-filzmoser2004multivariate)) is used to calculate the distance
