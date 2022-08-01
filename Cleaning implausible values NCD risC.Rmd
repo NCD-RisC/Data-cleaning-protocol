@@ -12,17 +12,17 @@ csl: https://raw.githubusercontent.com/citation-style-language/styles/master/car
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-# Cleaning individual data with biologically implausible values in NCD-RisC database
+# Criteria and procedure for data cleaning in the NCD-RisC database
 
 This document is the protocol for cleaning multiple variables in the NCD-RisC database, which has the following steps: \
 
-  1.	Applying univariate plausibility ranges\
-  2.	Applying multivariate constraints\
+  1.	Applying univariate cleaning criteria\
+  2.	Applying multivariate cleaning criteria\
   3.	Multivariate outlier detection\
 
 ### 1.	Univariate plausibility ranges
 
-Data outside the following plausibility ranges will be removed.
+Data outside the following plausibility ranges are removed.
 
 *Anthropometrics*
 
@@ -55,16 +55,16 @@ Data outside the following plausibility ranges will be removed.
 
 |Variable   | FPG (mmol/L)|OGTT (mmol/L)|HbA1c (%)|
 |:----------|:------------|:------------|:--------|
-|All ages   |   2.5-30    |  1.5-30     |  3-18   |
+|All ages   |   2-30      |  2-30       |  3-18   |
 
 \n
 
-*Kidney related variable*
+*Kidney function related variable*
 
 |Variable   | Serum creatinine (µmol/L)|eGFR (mL/min/1.73m2)|
 |:----------|:-------------------------|:-------------------|
 |All ages   |   8-1800                 |  5-250             |
-
+eGFR: estimated glomerular filtration rate
 \n
 
 ### 2. Multivariate constraints
@@ -105,17 +105,18 @@ In case neither the variable nor it's log transformation are close to be normall
 
 #### Pairs of variables considered
 
-All pairs of variables from the same family (anthropometrics, blood pressure etc...) should be considered. \
-For blood pressure, if multiple measurements are taken, the average SBP and DBP are calculated before multivariate cleaning, and after excluding measurements outside of plausibility ranges, by discarding the first measurement and averaging the remainings.\
-For lipids, LDL (or non-HDL) is very skewed,so we advise to not clean on the pair LDL-TC using mahalanobis distance. \
-Glucose variables tend to have a very skewed distribution and we advise to not clean any pair of glucose variables using Mahalanobis distance. \
-For Kidney, eGFR is calculated from serum creatinine using a regression-based model (eg. CKD-EPI) hence multivariate cleaning is not needed.
+All pairs of variables of interest from the same risk factor family are examined (see lists in the first section of this document). Exceptions are noted below.
+
+-Some variables, e.g., FPG, OGTT, LDL and non-HDL cholesterol, are very skewed even after log-transformation, therefore we do not recommend cleaning any pair that includes any of them using the method based on Mahalanobis distance. Alternative outlier detection methods are currently being explored for NCD-RisC work.\
+-For anthropometrics variables, the procedure should be applied separately for children (5-9 years), adolescents (10-14 years), and adults (15+ years).\
+-eGFR is calculated from serum creatinine using a regression-based model (eg. CKD-EPI) hence multivariate cleaning is not needed.\
+
 
 #### Procedure of multivariate outlier detection
 
-For each pair listed above:\
+For all pairs that multivariate cleaning are applied to, the cleaning process is to:\
   -	Compute the Mahalanobis of distance of all the data points after normalisation\
-  -	Exclude points with distance larger than 40.08 (quantile of chi2 distribution equivalent to 6SD for normal distribution)\
+  -	Exclude points with distance larger than 68.5  (quantile of chi2 distribution equivalent to 8SD for normal distribution)\
 
 
 #### Code and example 
