@@ -217,17 +217,17 @@ should be used.
 
 All pairs of variables of interest from the same risk factor family are examined (see lists in the first section of this document). Exceptions are noted below.
 
--For blood pressure, if multiple measurements are taken, the average SBP
+-  For blood pressure, if multiple measurements are taken, the average SBP
 and DBP are calculated before multivariate cleaning, and after excluding
 measurements outside of plausibility ranges, by discarding the first
 measurement and averaging the remainings.  
--For lipids, LDL (or non-HDL) is very skewed,so we advise to not clean on
+-  For lipids, LDL (or non-HDL) is very skewed,so we advise to not clean on
 the pair LDL-TC using mahalanobis distance.  
--Glucose variables tend to have a very skewed distribution and we advise
+-  Glucose variables tend to have a very skewed distribution and we advise
 to not clean any pair of glucose variables using Mahalanobis distance. 
--For anthropometrics variables, the procedure should be applied separaetely for 
+-  For anthropometrics variables, the procedure should be applied separaetely for 
 children (5-9 yos), adolescents (10-14 yos), and adults (15+).
--For Kidney, eGFR is calculated from serum creatinine using a
+-  For Kidney, eGFR is calculated from serum creatinine using a
 regression-based model (eg. CKD-EPI) hence multivariate cleaning is not
 needed.
 
