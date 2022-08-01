@@ -9,7 +9,7 @@ This document is the protocol for cleaning multiple variables in the NCD-RisC da
 
 ### 1. Applying Univariate cleaning criteria  
 
-Data outside the following ranges will be removed to minimise the possibility of entry error.
+Data outside the following ranges are removed to minimise the possibility of entry error.
 
 *Anthropometrics*
 
