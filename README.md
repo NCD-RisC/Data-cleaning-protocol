@@ -151,7 +151,7 @@ Data outside the following ranges are removed to minimise the possibility of ent
 </tr>
 </tbody>
 </table>
-
+eGFR: estimated glomerular filtration rate
 ### Applying multivariate cleaning criteria
 
 The following constraints are applied after applying univariate cleaning criteria listed above:  
