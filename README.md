@@ -1,8 +1,7 @@
 Cleaning individual data in NCD-RisC database
 ==================================================================================
 
-This document is the protocol for cleaning multiple variables in the
-NCD-RisC database, which has the following steps:  
+his document is the protocol for cleaning multiple variables in the NCD-RisC database, which has the following steps:  
 
 1.  Applying univariate cleaning criteria  
 2.  Applying multivariate cleaning criteria   
@@ -127,14 +126,14 @@ Data outside the following ranges will be removed to minimise the possibility of
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">All ages</td>
-<td style="text-align: left;">2.5-30</td>
-<td style="text-align: left;">1.5-30</td>
+<td style="text-align: left;">2-30</td>
+<td style="text-align: left;">2-30</td>
 <td style="text-align: left;">3-18</td>
 </tr>
 </tbody>
 </table>
 
-*Kidney related variable*
+*Kidney function related variable*
 
 <table>
 <thead>
@@ -216,24 +215,25 @@ should be used.
 
 #### Pairs of variables considered
 
-All pairs of variables from the same family (anthropometrics, blood
-pressure etc…) should be considered.  
-For blood pressure, if multiple measurements are taken, the average SBP
+All pairs of variables of interest from the same risk factor family are examined (see lists in the first section of this document). Exceptions are noted below.
+
+-For blood pressure, if multiple measurements are taken, the average SBP
 and DBP are calculated before multivariate cleaning, and after excluding
 measurements outside of plausibility ranges, by discarding the first
 measurement and averaging the remainings.  
-For lipids, LDL (or non-HDL) is very skewed,so we advise to not clean on
+-For lipids, LDL (or non-HDL) is very skewed,so we advise to not clean on
 the pair LDL-TC using mahalanobis distance.  
-Glucose variables tend to have a very skewed distribution and we advise
-to not clean any pair of glucose variables using Mahalanobis distance.  
-For Kidney, eGFR is calculated from serum creatinine using a
+-Glucose variables tend to have a very skewed distribution and we advise
+to not clean any pair of glucose variables using Mahalanobis distance. 
+-For anthropometrics variables, the procedure should be applied separaetely for 
+children (5-9 yos), adolescents (10-14 yos), and adults (15+).
+-For Kidney, eGFR is calculated from serum creatinine using a
 regression-based model (eg. CKD-EPI) hence multivariate cleaning is not
 needed.
-For anthropometrics variables, the procedure should be applied separaetely for 
-children (5-9 yos), adolescents (10-14 yos), and adults (15+).
+
 #### Procedure of multivariate outlier detection
 
-For each pair listed above:  
+For all pairs that multivariate cleaning are applied to, the cleaning process is to:
 - Compute the Mahalanobis of distance of all the data points after
 normalisation  
 - Exclude points with distance larger than 68.5 (quantile of chi2
