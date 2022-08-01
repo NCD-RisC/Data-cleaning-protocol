@@ -1,7 +1,7 @@
-Cleaning individual data in NCD-RisC database
+Criteria and procedure for data cleaning in the NCD-RisC database
 ==================================================================================
 
-his document is the protocol for cleaning multiple variables in the NCD-RisC database, which has the following steps:  
+This document is the protocol for cleaning multiple variables in the NCD-RisC database, which has the following steps:  
 
 1.  Applying univariate cleaning criteria  
 2.  Applying multivariate cleaning criteria   
