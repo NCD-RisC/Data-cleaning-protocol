@@ -245,7 +245,7 @@ distribution equivalent to 8SD for normal distribution)
 
 For the code and an example on simulated data of the multivariate
 outlier detection procedure go to:
-<a href="https://github.com/NCD-RisC/Multivariate-cleaning" class="uri">https://github.com/NCD-RisC/Multivariate-cleaning</a>
+<a href="https://github.com/NCD-RisC/Data-cleaning-protocol" class="uri">https://github.com/NCD-RisC/Data-cleaning-protocol.git</a>
 
 **References:**
 
