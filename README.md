@@ -96,8 +96,8 @@ Data outside the following ranges are removed to minimise the possibility of ent
 <tr class="header">
 <th style="text-align: left;">Variable</th>
 <th style="text-align: left;">TC (mmol/L)</th>
-<th style="text-align: left;">HDL (mmol/L)</th>
 <th style="text-align: left;">LDL (mmol/L)</th>
+<th style="text-align: left;">HDL (mmol/L)</th>
 <th style="text-align: left;">Triglycerides (mmol/L)</th>
 </tr>
 </thead>

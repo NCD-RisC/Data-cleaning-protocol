@@ -45,7 +45,7 @@ Data outside the following plausibility ranges are removed.
 
 *Lipids*
 
-|Variable   | TC (mmol/L) |HDL (mmol/L)|LDL (mmol/L)|Triglycerides (mmol/L)|
+|Variable   | TC (mmol/L) |LDL (mmol/L)|HDL (mmol/L)|Triglycerides (mmol/L)|
 |:----------|:------------|:-----------|:-----------|:---------------------|
 |All ages   |   1.75-20   |  0.5-10    |  0.4-5     |  0.2-20              |
 
