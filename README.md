@@ -161,7 +161,7 @@ The following constraints are applied after applying univariate cleaning criteri
 -   SBP &gt; DBP  
 If multiple measurements of blood pressure are taken, the average SBP and DBP are calculated by discarding the first measurement and averaging the remainders. The constraint is applied to the average SBP and DBP. The averaging should be done after excluding measurements outside of the ranges in the univariate cleaning criteria noted in the first section.
 -   TC &gt; LDL  
--   TC &gt; HDL  
+-   TC &ge; HDL  
 -   TC – (LDL + HDL) ≤ margin of error\*
 
 \*“margin of error” is determined by using the Cholesterol Reference
